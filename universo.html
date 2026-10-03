@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<title>El Universo de mi estrella preferida</title>
+    
+<style>
+    body{
+    margin:0;
+    overflow:hidden;
+    background:black;
+    font-family:Arial, sans-serif;
+}
+
+/* UNIVERSO */
+
+
+#universo{
+    width:100%;
+    height:100vh;
+    position:relative;
+    overflow:hidden;
+    background:
+        radial-gradient(
+            circle at center,
+            #120010 0%,
+            #080008 40%,
+            #000000 100%
+        );
+}
+
+/* NEBULOSA CENTRAL */
+
+#universo::before{
+    content:"";
+    position:absolute;
+    width:600px;
+    height:600px;
+    border-radius:50%;
+    background:rgba(255,105,217,0.08);
+    filter:blur(120px);
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+/* VIA LACTEA */
+
+#universo::after{
+    content:"";
+    position:absolute;
+    width:1200px;
+    height:250px;
+
+    background:
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.08),
+        rgba(255,105,217,0.12),
+        rgba(255,255,255,0.08),
+        transparent
+    );
+
+    filter:blur(70px);
+
+    transform:rotate(-25deg);
+
+    top:35%;
+    left:-10%;
+}
+
+/* ESTRELLAS DE FONDO */
+
+.estrella-pequena{
+    position:absolute;
+    width:1px;
+    height:1px;
+    background:white;
+    border-radius:50%;
+    opacity:0.4;
+}
+
+/* PARTICULAS ROSAS */
+
+.particula{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:#ff69d9;
+    border-radius:50%;
+    opacity:0.5;
+    animation:flotarParticula 12s linear infinite;
+}
+
+@keyframes flotarParticula{
+
+    from{
+        transform:translateY(100vh);
+    }
+
+    to{
+        transform:translateY(-100px);
+    }
+
+}
+
+/* ESTRELLAS */
+
+.estrella{
+    position:absolute;
+    border-radius:50%;
+    background:white;
+    cursor:pointer;
+    opacity:0.95;
+
+    box-shadow:
+        0 0 8px white,
+        0 0 15px white,
+        0 0 25px white;
+
+    transition:.3s;
+
+    animation: titilar 3s infinite;
+}
+
+@keyframes titilar{
+
+    0%{
+        opacity:0.3;
+        transform:scale(1);
+    }
+
+    50%{
+        opacity:1;
+        transform:scale(1.3);
+    }
+
+    100%{
+        opacity:0.3;
+        transform:scale(1);
+    }
+
+}
+
+/* ESTRELLAS ESPECIALES */
+
+.estrella.especial{
+
+    background:#ff8bd1;
+
+    opacity:1;
+
+    animation:
+        titilar 3s infinite,
+        palpitarEspecial 2s infinite;
+
+    box-shadow:
+        0 0 10px #ff69d9,
+        0 0 20px #ff69d9,
+        0 0 30px #ff69d9;
+}
+
+.estrella.especial:hover{
+
+    transform:scale(3);
+
+    box-shadow:
+        0 0 20px #ff69d9,
+        0 0 40px #ff69d9,
+        0 0 80px #ff69d9;
+}
+
+@keyframes palpitarEspecial{
+
+    0%,100%{
+
+        transform:scale(1);
+
+        box-shadow:
+            0 0 10px #ff69d9,
+            0 0 20px #ff69d9;
+    }
+
+    50%{
+
+        transform:scale(1.8);
+
+        box-shadow:
+            0 0 20px #ff69d9,
+            0 0 40px #ff69d9,
+            0 0 70px #ff69d9;
+    }
+
+}
+
+/* ESTRELLA LEGENDARIA */
+
+.estrella-legendaria{
+
+    position:absolute;
+
+    width:20px;
+    height:20px;
+
+    border-radius:50%;
+
+    background:#ffd700;
+
+    transform:translate(-50%,-50%);
+
+    cursor:pointer;
+
+    z-index:50;
+
+    animation:
+        titilar 2s infinite,
+        palpitarLegendaria 1.5s infinite;
+
+    box-shadow:
+        0 0 20px #ffd700,
+        0 0 40px #ffd700,
+        0 0 80px #ffd700,
+        0 0 120px #ffd700;
+}
+
+@keyframes palpitarLegendaria{
+
+    0%,100%{
+        transform:
+        translate(-50%,-50%)
+        scale(1);
+    }
+
+    50%{
+        transform:
+        translate(-50%,-50%)
+        scale(1.5);
+    }
+
+}
+
+/* ESTRELLA FUGAZ */
+
+.estrella-fugaz{
+
+    position:absolute;
+
+    height:2px;
+
+    background:
+    linear-gradient(
+        to right,
+        white,
+        transparent
+    );
+
+    box-shadow:
+        0 0 10px white,
+        0 0 20px white;
+
+    pointer-events:none;
+
+    animation:
+    estrellaFugaz linear forwards;
+}
+
+@keyframes estrellaFugaz{
+
+    0%{
+        opacity:0;
+        transform:
+        translate(0,0)
+        rotate(-35deg);
+    }
+
+    10%{
+        opacity:1;
+    }
+
+    90%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+        transform:
+        translate(-700px,700px)
+        rotate(-35deg);
+    }
+
+}
+
+/* TITULO */
+
+#tituloUniverso{
+
+    position:absolute;
+
+    top:30px;
+
+    width:100%;
+
+    text-align:center;
+
+    color:white;
+
+    z-index:10;
+}
+
+#tituloUniverso h1{
+
+    color:#ff69d9;
+
+    margin-bottom:10px;
+
+    text-shadow:
+        0 0 20px #ff69d9,
+        0 0 40px #ff69d9;
+}
+
+/* CONTADOR */
+
+#contador{
+
+    position:absolute;
+
+    top:20px;
+    right:20px;
+
+    color:white;
+
+    background:
+    rgba(0,0,0,0.5);
+
+    padding:10px 15px;
+
+    border-radius:15px;
+
+    border:1px solid #ff69d9;
+
+    box-shadow:
+    0 0 15px #ff69d9;
+
+    z-index:10;
+}
+
+/* POPUP */
+
+#popupMensaje{
+
+    display:none;
+
+    position:fixed;
+
+    top:50%;
+    left:50%;
+
+    transform:
+    translate(-50%,-50%);
+
+    background:
+    rgba(15,15,15,0.95);
+
+    border:2px solid #ff69d9;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    max-width:400px;
+
+    text-align:center;
+
+    color:white;
+
+    box-shadow:
+    0 0 30px #ff69d9;
+
+    z-index:999;
+
+    animation:
+    aparecer 0.4s ease;
+}
+
+#popupMensaje h3{
+
+    color:#ff69d9;
+
+    margin-bottom:15px;
+}
+
+#popupMensaje button{
+
+    margin-top:15px;
+
+    padding:10px 20px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#ff69d9;
+
+    color:white;
+
+    cursor:pointer;
+}
+
+#popupMensaje button:hover{
+
+    box-shadow:
+    0 0 20px #ff69d9;
+}
+
+@keyframes aparecer{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translate(-50%,-60%);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translate(-50%,-50%);
+    }
+
+}
+/* TODO TU CSS AQUÍ */
+</style>
+</head>
+
+<body>
+<div id="universo">
+
+    <div id="tituloUniverso">
+        <h1>🌌 Ten tu propio universo mi payasita 🌌</h1>
+        <p>
+            Cada estrella guarda algo que quise dejar para ti.
+            Explora cuando quieras. ✨
+        </p>
+    </div>
+
+    <div id="contador">
+        ⭐ Descubiertas: <span id="cantidad">0</span>/50
+🌹 Especiales: <span id="especiales">0</span>/5
+    </div>
+
+</div>
+
+<div id="popupMensaje">
+    <h3>✨ Estrella descubierta ✨</h3>
+    <p id="textoMensaje"></p>
+    <button onclick="cerrarMensaje()">Cerrar 💖</button>
+</div>
+
+<script>
+    
+const universo = document.getElementById("universo");
+
+let descubiertas = 0;
+let especialesEncontradas = 0;
+let legendariaCreada = false;
+let posicionesEspeciales = [];
+
+
+const mensajesExtra = [
+"💖 Qué alegría volver a encontrarte por aquí, amor.",
+"🌹 Esta estrella estaba esperando justo por ti.",
+"✨ Qué bonita coincidencia seguir compartiendo este universo contigo.",
+"🌙 Creo que esta estrella se puso nerviosa cuando llegaste.",
+"💌 Cada estrella es una pequeña carta escrita para ti.",
+"🌸 Hoy también mereces escuchar algo bonito.",
+"⭐ Eres de esas personas que hacen que todo valga un poquito más la pena.",
+"💕 Si pudiera regalarte el cielo, empezaría por esta estrella.",
+"🌌 Este universo es más bonito desde que tú lo recorres.",
+"🌠 Espero que esta estrella haga tu día un poquito más feliz.",
+"💖 Siempre hay una buena razón para sonreír... hoy quiero ser una de ellas.",
+"🌹 Cariño, nunca dejes de ser tú.",
+"🌌 Este universo nació el mismo día en que entendí que las estrellas ya no eran lo más bonito del cielo.",
+"✨ Si alguna vez te preguntas por qué hay tantas estrellas aquí, es porque ninguna era suficiente para representar todo lo que me haces sentir.",
+"💖 Hay personas que pasan por nuestra vida... tú llegaste para convertirte en mi lugar favorito.",
+"🌙 Cuando miro el cielo ya no cuento estrellas, cuento las veces que me gustaría tenerte a mi lado.",
+"🌹 Prometo que, aunque hoy solo pueda regalarte este universo, algún día quiero regalarte momentos que valgan más que cualquier estrella.",
+"🍫 También prometo sorprenderte con tus chocolates favoritos, solo porque una sonrisa tuya vale más que cualquier tesoro.",
+"🌠 Si el destino existe, espero que un día nos encuentre caminando bajo este mismo cielo, pero tomados de la mano.",
+"💕 Dicen que los hilos rojos nunca se rompen. Quiero creer que el nuestro ya comenzó a unir nuestros corazones.",
+"⭐ No me importa cuántos kilómetros existan. Si al final del camino estás tú, entonces cada paso habrá valido la pena.",
+"💌 Este no es un universo para perderte... es un universo para que encuentres cuánto significas para mí.",
+"🌌 Quiero ser quien te abrace cuando tengas miedo, quien celebre tus victorias y quien convierta tus lágrimas en sonrisas.",
+"✨ Ojalá algún día podamos mirar las estrellas juntos y reírnos de la distancia que un día nos separó.",
+"🌹 Si la vida nos da la oportunidad, quiero escribir nuestra historia con viajes, abrazos, chocolates y muchísimas fotografías.",
+"💖 No busco un amor perfecto; sueño con uno que nunca deje de elegirse todos los días.",
+"🌠 Mi sueño más bonito no es este universo... es poder construir un hogar donde tú seas la razón de cada amanecer.",
+"🌙 Quiero que el tiempo pase y seguir descubriendo nuevas razones para enamorarme de ti.",
+"💕 Este universo termina... pero lo que siento por ti apenas está comenzando.",
+"⭐ Si alguna vez dudas de ti, recuerda esto: hubo alguien que fue capaz de crear un cielo entero solo para verte sonreír.",
+"💌 Tal vez hoy solo seamos dos personas descubriéndose... pero mi corazón ya imagina un futuro donde seamos una familia.",
+"❤️ Y si un día el universo decide cumplir un deseo... ojalá sea el de permitirme caminar el resto de mi vida contigo.",
+"✨ Qué suerte tuvo esta estrella de cruzarse contigo.",
+"🌸 Ojalá este detalle te saque una sonrisa sincera.",
+"⭐ Si el universo pudiera elegir, también te elegiría a ti.",
+"💌 Tu sonrisa merece aparecer entre las constelaciones.",
+"🌙 Me gusta imaginar que estás sonriendo al leer esto.",
+"💕 Una estrella más... un recordatorio más de lo especial que eres.",
+"🌠 Cada rincón de este cielo tiene un poquito de ti.",
+"💖 Hay días buenos, y luego están los días en los que apareces tú.",
+"🌹 Qué bonito es poder escribir cosas pensando en ti.",
+"✨ Si esta estrella hablara, diría tu nombre.",
+"🌸 Nunca olvides lo increíble que eres.",
+"⭐ Este universo guarda muchos secretos... tú eres el más bonito.",
+"💌 A veces una sola persona puede iluminar más que mil estrellas.",
+"🌌 Me gusta pensar que cada estrella te acompaña un ratito.",
+"💕 Espero que estés teniendo un día tan bonito como tú.",
+"🌙 Eres la clase de persona que uno agradece haber conocido.",
+"💖 Quédate un poco más... aún quedan muchas sorpresas.",
+"🌹 Esta estrella decidió sonreír cuando llegaste.",
+"✨ Cada estrella que encuentras hace este regalo más especial.",
+"🌸 Si pudiera enviarte un abrazo, viajaría en forma de estrella.",
+"⭐ Tu felicidad siempre será una buena noticia.",
+"💌 Sigue explorando, amor, todavía queda mucho cielo.",
+"🌠 No todas las estrellas brillan igual... como tampoco todas las personas.",
+"💕 Me encanta que seas tú quien esté descubriendo todo esto.",
+"🌙 Qué bonito saber que llegaste hasta aquí.",
+"💖 Gracias por dedicarle tiempo a este pequeño universo.",
+"🌹 Espero que nunca te falten razones para sonreír.",
+"✨ Hay personas que iluminan sin darse cuenta... tú eres una de ellas.",
+"🌸 Ojalá todas tus noches tengan un poquito de esta magia.",
+"⭐ Este cielo estaría incompleto sin ti.",
+"💌 Siempre habrá una estrella feliz de volver a verte.",
+"🌌 Tu presencia hace que este universo tenga sentido.",
+"💕 Qué suerte la mía de poder dedicarte todo esto.",
+"🌙 No importa dónde estés, espero que te sientas querida.",
+"💖 Si esta estrella llegó hasta ti, era porque quería saludarte.",
+"🌹 Eres una casualidad demasiado bonita.",
+"✨ Cada mensaje es un pedacito del cariño que te tengo.",
+"🌸 Ojalá esta estrella te acompañe el resto del día.",
+"⭐ Sigue brillando como siempre lo haces.",
+"💌 Qué bonito debe ser el cielo cuando tú lo miras.",
+"🌠 Espero que hoy la vida también te regale cosas bonitas.",
+"💕 Tu forma de ser merece muchas constelaciones.",
+"🌙 Si pudiera detener el tiempo, elegiría un momento contigo.",
+"💖 A veces pienso que el universo conspira para acercarme a ti.",
+"🌹 Nunca dejes de creer en ti.",
+"✨ Siempre habrá una estrella feliz de encontrarte.",
+"🌸 Qué bonito saber que sigues aquí.",
+"⭐ Gracias por convertir este regalo en algo vivo.",
+"💌 Hay mensajes que solo tienen sentido cuando los lees tú.",
+"🌌 Tal vez esta estrella solo quería hacerte compañía.",
+"💕 Espero que este universo siempre te saque una sonrisa.",
+"🌙 Cada clic tuyo hace que este cielo cobre vida.",
+"💖 Si pudiera describirte con una palabra, diría 'increíble'.",
+"🌹 Esta estrella pensó en ti antes de brillar.",
+"✨ Eres más especial de lo que imaginas.",
+"🌸 Qué bonito sería poder ver tu reacción al encontrar este mensaje.",
+"⭐ Sigue buscando... todavía quedan muchas estrellas.",
+"💌 Este universo siempre tendrá un lugar para ti.",
+"🌠 Quédate todo el tiempo que quieras.",
+"💕 Nunca subestimes el brillo que llevas dentro.",
+"🌙 Espero que hoy todo salga un poquito mejor.",
+"💖 Gracias por regalarme tantos motivos para sonreír.",
+"🌹 Qué bonito es que existas.",
+"✨ Tu luz hace que este cielo se vea diferente.",
+"🌸 Ojalá esta estrella te encuentre en un buen momento.",
+"⭐ Eres una de mis personas favoritas.",
+"💌 Esta estrella decidió convertirse en un abrazo.",
+"🌌 Espero que nunca dudes de lo maravillosa que eres.",
+"💕 Qué suerte haber coincidido contigo.",
+"🌙 Tu nombre quedaría precioso escrito entre las estrellas.",
+"💖 Si esta estrella llegó hasta ti, es porque te la habías ganado.",
+"🌹 Hay personas que dejan huellas... tú dejas constelaciones.",
+"✨ Gracias por seguir explorando este pequeño rincón.",
+"🌸 A veces las cosas más pequeñas guardan el mayor cariño.",
+"⭐ Espero que este detalle siempre te saque una sonrisa.",
+"💌 Qué bonito tener una excusa para recordarte lo especial que eres.",
+"🌠 El universo también sonríe cuando apareces.",
+"💕 Nunca olvides cuánto vales.",
+"🌙 Eres una historia bonita que me encanta seguir leyendo.",
+"💖 Cada estrella guarda un poquito de admiración por ti.",
+"🌹 Si hoy no te dijeron algo bonito, aquí tienes uno: eres increíble.",
+"✨ Hay regalos que solo tienen sentido cuando llegan a la persona correcta.",
+"🌸 Gracias por ser la inspiración de este pequeño universo.",
+"⭐ Tu sonrisa siempre será bienvenida aquí.",
+"💌 Ojalá este mensaje llegue justo cuando lo necesitabas.",
+"🌌 Lo mejor de este cielo no son las estrellas... eres tú.",
+"💕 Espero que al terminar de explorar te lleves un montón de sonrisas.",
+"🌙 Gracias por existir❤️"
+];
+const mensajesEspeciales = [
+    "💖 Amor, de todas las estrellas que hay aquí, mi favorita siempre vas a ser tú.",
+    "🌹 Cariño, si este universo tiene un corazón, definitivamente lleva tu nombre.",
+    "✨ , qué bonita coincidencia fue encontrarte en mi vida.",
+    "💌 Si esta estrella pudiera hablar, te diría exactamente lo mucho que me encantas.",
+    "🌙 No importa cuántas estrellas existan, ninguna brilla como tus ojitos.",
+    "💖 Amor, ojalá pudieras verte con los mismos ojos con los que yo te veo.",
+    "🌸 Encontrarte fue fácil... dejar de pensar en ti, imposible.",
+    "🌠 Cada estrella de este universo guarda un pedacito del cariño que siento por ti.",
+    "💌 Si sonríes al leer esto, ya hice que este regalo valiera la pena.",
+    "✨ A veces pienso que las estrellas tienen celos porque tú brillas mucho más.",
+    "🌹 Si pudiera pedir un deseo, pediría seguir viendo esa sonrisa tan bonita.",
+    "💖 Cariño, este universo es inmenso... pero siempre termina llevándome a ti.",
+    "🌌 Dicen que el universo no tiene final, igual que las razones que tengo para sonreír cuando hablo contigo.",
+    "🌸 Qué peligroso fue conocerte... ahora cualquier cosa bonita me recuerda a ti.",
+    "💌 No sé si eres magia, pero desde que llegaste todo se siente un poquito más bonito.",
+    "✨ Si esta estrella apareció para ti, es porque quería recordarte lo especial que eres para mí.",
+    "🌙 Ojalá algún día puedas darte cuenta de lo mucho que iluminas mis días.",
+    "💖 Amor, eres esa casualidad que jamás quisiera perder.",
+    "🌹 Este universo está lleno de estrellas, pero fue hecho pensando en una sola persona... tú.",
+    "🌠 Si llegaste hasta aquí, te ganaste otro recordatorio: me encantas muchísimo. ❤️"
+];
+
+
+
+/* ESTRELLAS DE FONDO */
+for(let i = 0; i < 5000; i++){
+    const estrellaPequena = document.createElement("div");
+
+    estrellaPequena.classList.add("estrella-pequena");
+
+    estrellaPequena.style.left = Math.random() * 100 + "%";
+    estrellaPequena.style.top = Math.random() * 100 + "%";
+
+    universo.appendChild(estrellaPequena);
+}
+
+/* ESTRELLAS FUGACES */
+function crearEstrellaFugaz(){
+
+    const fugaz = document.createElement("div");
+    fugaz.classList.add("estrella-fugaz");
+
+    const largo = Math.random() * 120 + 120;
+    fugaz.style.width = largo + "px";
+
+    const duracion = Math.random() * 2 + 2;
+    fugaz.style.animationDuration = duracion + "s";
+
+    fugaz.style.left = (Math.random() * window.innerWidth) + "px";
+    fugaz.style.top = (Math.random() * 250) + "px";
+
+    universo.appendChild(fugaz);
+
+    setTimeout(() => fugaz.remove(), duracion * 1000);
+
+    setTimeout(crearEstrellaFugaz, Math.random() * 15000 + 10000);
+}
+
+crearEstrellaFugaz();
+/* ESTRELLAS PRINCIPALES */
+for (let i = 0; i < 250; i++) {
+
+    const estrella = document.createElement("div");
+    estrella.classList.add("estrella");
+
+    const esEspecial = Math.random() < 0.05;
+
+    estrella.dataset.especial = esEspecial ? "true" : "false";
+
+    if (esEspecial) {
+
+        estrella.classList.add("especial");
+
+        estrella.dataset.mensaje =
+            mensajesEspeciales[Math.floor(Math.random() * mensajesEspeciales.length)];
+
+        const size = Math.random() * 5 + 8;
+        estrella.style.width = size + "px";
+        estrella.style.height = size + "px";
+
+    } else {
+
+        estrella.dataset.mensaje =
+            mensajesExtra[Math.floor(Math.random() * mensajesExtra.length)];
+
+        const size = Math.random() * 3 + 2;
+        estrella.style.width = size + "px";
+        estrella.style.height = size + "px";
+    }
+
+    estrella.style.left = Math.random() * 100 + "%";
+    estrella.style.top = Math.random() * 100 + "%";
+
+    estrella.style.animationDuration = (Math.random() * 4 + 2) + "s";
+
+    // fallback seguro
+    estrella.dataset.mensaje =
+        estrella.dataset.mensaje || "✨ Este mensaje se perdió en el universo ✨";
+
+    estrella.addEventListener("click", () => {
+
+        const titulo = document.querySelector("#popupMensaje h3");
+
+        const mensaje = estrella.dataset.mensaje;
+
+        const esEspecialClick = estrella.dataset.especial === "true";
+
+        if (esEspecialClick) {
+            titulo.innerText = "🌹 Estrella Especial Descubierta 🌹";
+
+            if (!estrella.dataset.contada) {
+                estrella.dataset.contada = "true";
+                especialesEncontradas++;
+                document.getElementById("especiales").innerText = especialesEncontradas;
+
+                if (especialesEncontradas === 5 && !legendariaCreada) {
+                    crearEstrellaLegendaria();
+                    legendariaCreada = true;
+                }
+            }
+
+        } else {
+            titulo.innerText = "✨ LA ESTRELLA DE MI CORAZON ✨";
+        }
+
+        document.getElementById("textoMensaje").innerText = mensaje;
+        document.getElementById("popupMensaje").style.display = "block";
+
+        if (!estrella.dataset.visitada) {
+            estrella.dataset.visitada = "true";
+            descubiertas++;
+            document.getElementById("cantidad").innerText = descubiertas;
+        }
+
+        estrella.style.background = "#ffd700";
+        estrella.style.boxShadow = "0 0 10px #ffd700, 0 0 20px #ffd700";
+    });
+
+    universo.appendChild(estrella);
+}
+/* ESTRELLA LEGENDARIA */
+function crearEstrellaLegendaria(){
+
+    const legendaria = document.createElement("div");
+    legendaria.classList.add("estrella-legendaria");
+
+    legendaria.style.left = "50%";
+    legendaria.style.top = "50%";
+
+    legendaria.dataset.mensaje =
+        "💖 Tal vez este universo no sea infinito, pero fue creado con mucho cariño para ti. Te quiero mucho mi mulier. 🌌✨";
+
+    legendaria.addEventListener("click", () => {
+
+        document.querySelector("#popupMensaje h3").innerText =
+            "👑 Estrella Legendaria 👑";
+
+        document.getElementById("textoMensaje").innerText =
+            legendaria.dataset.mensaje;
+
+        document.getElementById("popupMensaje").style.display = "block";
+    });
+
+    universo.appendChild(legendaria);
+}
+
+/* CERRAR POPUP */
+function cerrarMensaje(){
+    document.getElementById("popupMensaje").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>
+
+
+

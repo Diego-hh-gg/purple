@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Un regalo especial 💖</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    background:#0a0a0a;
+    overflow:hidden;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    background:rgba(20,20,20,0.9);
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 0 20px #ff4fa3;
+    border:2px solid #ff4fa3;
+    z-index:2;
+}
+
+h1{
+    color:#ff69d9;
+    margin-bottom:15px;
+    text-shadow:0 0 10px #ff69d9;
+}
+
+p{
+    color:white;
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    margin-bottom:15px;
+    background:#1a1a1a;
+    color:white;
+    outline:none;
+    border:1px solid #ff69d9;
+}
+
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:10px;
+    background:#ff4fa3;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.3s;
+}
+
+button:hover{
+    box-shadow:0 0 20px #ff69d9;
+    transform:scale(1.05);
+}
+
+#error{
+    color:#ff6b6b;
+    margin-top:10px;
+}
+
+#mensaje{
+    display:none;
+    color:white;
+    text-align:center;
+    z-index:2;
+}
+
+#mensaje h1{
+    font-size:3rem;
+}
+.correcto{
+    border:2px solid #ff69d9;
+    box-shadow:
+        0 0 15px #ff69d9,
+        0 0 30px #ff69d9,
+        0 0 60px #ff69d9;
+}
+.brillo-escribiendo{
+    box-shadow:
+        0 0 10px #ff69d9,
+        0 0 20px #ff69d9,
+        0 0 40px #ff69d9;
+    transition:0.2s;
+}
+.container:hover{
+    box-shadow:
+        0 0 20px #ff4fa3,
+        0 0 40px #ff69d9,
+        0 0 80px #ff69d9;
+}
+.corazon{
+    position:absolute;
+    color:#ff69d9;
+    animation:flotar linear infinite;
+    opacity:0.8;
+}
+.destello{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:#ff69d9;
+    border-radius:50%;
+    box-shadow:
+        0 0 10px #ff69d9,
+        0 0 20px #ff69d9,
+        0 0 40px #ff69d9;
+    pointer-events:none;
+    animation:brillar 1.2s ease-out forwards;
+}
+#btnCarta{
+    margin-top:15px;
+    padding:12px 25px;
+    border:none;
+    border-radius:25px;
+    background:linear-gradient(45deg,#ff69d9,#6d28d9);
+    color:white;
+    cursor:pointer;
+    box-shadow:0 0 15px #ff69d9;
+    transition:0.3s;
+}
+
+#btnCarta:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 25px #ff69d9;
+}
+@keyframes brillar{
+    0%{
+        transform:scale(0);
+        opacity:1;
+    }
+
+    50%{
+        transform:scale(2);
+        opacity:1;
+    }
+
+    100%{
+        transform:scale(0);
+        opacity:0;
+    }
+}
+@keyframes flotar{
+    from{
+        transform:translateY(100vh);
+    }
+    to{
+        transform:translateY(-120vh);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<body>
+
+<div class="container" id="login">
+    <h1>💖 Todo lo especial siempre se guarda bien 💖</h1>
+    <h1> Como el dia q nos conocimos </h1>
+    <p id="mensajeAleatorio"></p>
+
+    <input type="password" id="password" placeholder="Contraseña">
+
+    <button onclick="verificar()">Entrar 💕</button>
+
+    <p id="error"></p>
+</div>
+
+<!-- PANTALLA MENSAJE -->
+<div id="mensaje" style="display:none; text-align:center;">
+    <h1>✨ ¡Bienvenida! ✨</h1>
+    <p>Al mundo que cree para ti sola💖</p>
+
+    <button id="btnCarta" style="display:none;" onclick="irCarta()">
+        💌 Ir a la carta
+    </button>
+</div>
+<script>
+
+// CAMBIA ESTA CONTRASEÑA
+const contraseña = "0110";
+
+const inputPassword = document.getElementById("password");
+
+const errores = [
+    "Mmm... casi 😅",
+    "Dia q te declare mi amor 💭",
+    "Sigue intentando 💕",
+    "Sé que puedes descubrirlo 🌹",
+    "0110"
+];
+
+const mensajes = [
+    "Hay una sorpresa esperándote... 💕",
+    "Solo alguien especial puede entrar aquí 🌹",
+    "Hoy es un día muy importante ✨",
+    "Preparé algo con mucho cariño 💖",
+    "Espero que te guste lo que encontrarás 💕",
+    "Una pequeña aventura está por comenzar 🌸"
+];
+
+let intentos = 0;
+
+// Mostrar mensaje aleatorio al cargar
+const mensajeAleatorio = document.getElementById("mensajeAleatorio");
+
+if(mensajeAleatorio){
+    mensajeAleatorio.innerText =
+    mensajes[Math.floor(Math.random() * mensajes.length)];
+}
+function verificar(){
+
+    let ingreso = document.getElementById("password").value;
+
+    if(ingreso === contraseña){
+
+        document.getElementById("login").style.display = "none";
+        document.getElementById("mensaje").style.display = "block";
+
+        // MOSTRAR BOTÓN
+        document.getElementById("btnCarta").style.display = "inline-block";
+
+    } else {
+
+        document.getElementById("error").innerText =
+        errores[intentos % errores.length];
+
+        intentos++;
+    }
+}
+function irCarta(){
+    window.location.href = "carta.html";
+}
+// Efectos al escribir
+inputPassword.addEventListener("input", () => {
+
+    // Borde neón cuando tenga 4 caracteres o más
+    if(inputPassword.value.length >= 4){
+        inputPassword.classList.add("correcto");
+    }else{
+        inputPassword.classList.remove("correcto");
+    }
+
+    // Brillo temporal
+    inputPassword.classList.add("brillo-escribiendo");
+
+    const rect = inputPassword.getBoundingClientRect();
+
+    crearDestello(
+        rect.left + Math.random() * rect.width,
+        rect.top + Math.random() * rect.height
+    );
+
+    setTimeout(() => {
+        inputPassword.classList.remove("brillo-escribiendo");
+    }, 200);
+
+});
+
+// Corazones flotando
+function crearCorazon(){
+
+    const corazon = document.createElement("div");
+
+    corazon.classList.add("corazon");
+    corazon.innerHTML = "❤";
+
+    corazon.style.left = Math.random() * 100 + "vw";
+    corazon.style.fontSize = (Math.random() * 20 + 15) + "px";
+    corazon.style.animationDuration =
+    (Math.random() * 5 + 5) + "s";
+
+    document.body.appendChild(corazon);
+
+    setTimeout(() => {
+        corazon.remove();
+    }, 10000);
+}
+
+setInterval(crearCorazon, 300);
+
+// Crear destellos
+function crearDestello(x, y){
+
+    const destello = document.createElement("div");
+
+    destello.classList.add("destello");
+
+    destello.style.left = x + "px";
+    destello.style.top = y + "px";
+
+    document.body.appendChild(destello);
+
+    setTimeout(() => {
+        destello.remove();
+    }, 1200);
+}
+
+// Destellos al hacer clic fuera de la tarjeta
+document.addEventListener("click", function(e){
+
+    const tarjeta = document.querySelector(".container");
+
+    if(!tarjeta.contains(e.target)){
+
+        for(let i = 0; i < 8; i++){
+
+            setTimeout(() => {
+
+                crearDestello(
+                    e.clientX + (Math.random() * 80 - 40),
+                    e.clientY + (Math.random() * 80 - 40)
+                );
+
+            }, i * 50);
+
+        }
+
+    }
+
+});
+
+// Destellos aleatorios automáticos
+setInterval(() => {
+
+    crearDestello(
+        Math.random() * window.innerWidth,
+        Math.random() * window.innerHeight
+    );
+
+}, 1500);
+
+</script>
+
+
+
+
+
+</body>
+</html>
